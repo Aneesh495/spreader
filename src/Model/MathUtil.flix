@@ -3,6 +3,9 @@
 
 pub mod Model.MathUtil {
 
+    /// Mathematical constant Pi.
+    pub def pi(): Float64 = 3.14159265358979323846
+
     /// Pure Newton-Raphson square root implementation.
     pub def sqrt(x: Float64): Float64 = {
         if (x <= 0.0) 0.0
@@ -50,5 +53,22 @@ pub mod Model.MathUtil {
         let x4 = x2 * x2;
         let x6 = x4 * x2;
         1.0 - (x2 / 2.0) + (x4 / 24.0) - (x6 / 720.0)
+    }
+
+    /// Computes arctangent via argument reduction and series expansion.
+    pub def atan(x: Float64): Float64 = {
+        if (x > 1.0) (pi() / 2.0) - atan(1.0 / x)
+        else if (x < -1.0) -(pi() / 2.0) - atan(1.0 / x)
+        else {
+            // For |x| <= 1.0, use polynomial series
+            let x2 = x * x;
+            let x3 = x * x2;
+            let x5 = x3 * x2;
+            let x7 = x5 * x2;
+            let x9 = x7 * x2;
+            let x11 = x9 * x2;
+            let x13 = x11 * x2;
+            x - (x3 / 3.0) + (x5 / 5.0) - (x7 / 7.0) + (x9 / 9.0) - (x11 / 11.0) + (x13 / 13.0)
+        }
     }
 }
