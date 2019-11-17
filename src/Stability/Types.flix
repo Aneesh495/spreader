@@ -56,7 +56,7 @@ pub mod Stability.Types {
         minGmtFluidMeters = Float64,    // Standard container vessel: >= 0.30m or 0.15m
         maxHeelDegrees = Float64,       // In-port operations: <= 1.5 degrees
         maxTrimSternMeters = Float64,   // Normal operating trim: <= 2.50m
-        maxTrimHeadMeters = Float64     // Trim by head not allowed: <= 0.0m
+        minTrimMeters = Float64         // Trim by head limit: >= -0.50m
     }
 
     /// Default IMO criteria for modern container vessels.
@@ -64,6 +64,6 @@ pub mod Stability.Types {
         minGmtFluidMeters = 0.30,
         maxHeelDegrees = 1.50,
         maxTrimSternMeters = 2.50,
-        maxTrimHeadMeters = 0.00
+        minTrimMeters = -0.50
     }
 }
