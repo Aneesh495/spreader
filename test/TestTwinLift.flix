@@ -4,7 +4,8 @@ mod TestTwinLift {
     use Model.HazmatTypes.ImdgClass;
     use Crane.TwinLift.{
         TwinCandidate, TwinLiftIncompatibility,
-        computeEccentricity, areAdjacentTwinCells, validateTwinPair, pairTwinContainers
+        computeEccentricity, computeEccentricMomentKnm, computeHeadblockTiltDegrees,
+        areAdjacentTwinCells, validateTwinPair, pairTwinContainers
     };
 
     @Test
@@ -16,7 +17,15 @@ mod TestTwinLift {
         // W1 = 10.0, W2 = 30.0 -> Total = 40.0, Diff = 20.0
         // ecc = 3.409 * (20.0 / 40.0) = 1.7045m
         let eccUnequal = computeEccentricity(10.0, 30.0);
-        Assert.assertTrue(eccUnequal > 1.70 and eccUnequal < 1.71)
+        Assert.assertTrue(eccUnequal > 1.70 and eccUnequal < 1.71);
+
+        // Moment = 40.0 * 9.80665 * 1.7045 approx 668.6 kNm
+        let moment = computeEccentricMomentKnm(10.0, 30.0);
+        Assert.assertTrue(moment > 660.0 and moment < 680.0);
+
+        // Tilt with 500 kNm/deg stiffness = 668.6 / 500 = 1.337 deg
+        let tilt = computeHeadblockTiltDegrees(moment, 500.0);
+        Assert.assertTrue(tilt > 1.3 and tilt < 1.4)
     }
 
     @Test
