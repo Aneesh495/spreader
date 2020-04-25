@@ -1,0 +1,19 @@
+{
+  "name": "@spreader/pcs-client",
+  "version": "0.1.0",
+  "description": "Port Community System BAPLIE and COPRAR EDI Exchange Client",
+  "main": "dist/client.js",
+  "types": "dist/client.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node dist/test/client.test.js"
+  },
+  "keywords": [
+    "container-terminal",
+    "edifact",
+    "baplie",
+    "port-community-system"
+  ],
+  "author": "Aneesh Krishna",
+  "license": "MIT"
+}
